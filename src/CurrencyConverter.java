@@ -16,22 +16,24 @@ public class CurrencyConverter {
 
         String baseCurrency;
         do {
-            System.out.println("********************************************");
+            System.out.println("\n********************************************");
 
-            System.out.println("\nIngrese la moneda a convertir (por ejemplo," +
+            System.out.println("\nIngrese la moneda a convertir: " +
                     "\n USD, EUR, GBP, JPY, AUD, CAD, CHF, CNY, SEK, NZD, MXN," +
                     "\n SGD, HKD, NOK, KRW, TRY, INR, RUB, BRL, ZAR, PEN):");
             baseCurrency = scanner.nextLine().toUpperCase();
             if (!AVAILABLE_CURRENCIES.contains(baseCurrency)) {
-                System.out.println("Moneda base no válida. Por favor, ingrese una moneda válida.");
+                System.out.println("Moneda ingresada no válida. Por favor, ingrese una moneda de la lista.");
             }
         } while (!AVAILABLE_CURRENCIES.contains(baseCurrency));
 
+        System.out.println("--------------------------------------------");
         System.out.println("Ha seleccionado la moneda " + baseCurrency);
+        System.out.println("--------------------------------------------");
 
-        System.out.println("Opciones de conversión:");
+        System.out.println("Elija la opción que desea convertir:");
 
-        // Calcula el número total de monedas disponibles para dividir en cinco columnas
+        //Opción de monedas disponibles en cinco columnas
         int totalCurrencies = AVAILABLE_CURRENCIES.size() - 1; // Excluye la moneda base
         int currenciesPerColumn = (totalCurrencies + 4) / 5; // Redondea hacia arriba
 
@@ -46,7 +48,7 @@ public class CurrencyConverter {
             }
         }
 
-        System.out.println("\nIngrese el número correspondiente a la opción de conversión:");
+        System.out.println("\nIngrese el número de la opción de conversión:");
         int selectedOption = scanner.nextInt();
         if (selectedOption < 1 || selectedOption > totalCurrencies) {
             System.out.println("Opción no válida. Por favor, ingrese un número válido.");
@@ -64,8 +66,9 @@ public class CurrencyConverter {
                 currentIndex++;
             }
         }
-
+        System.out.println("--------------------------------------------");
         System.out.println("Ha seleccionado convertir de " + baseCurrency + " a " + targetCurrency);
+        System.out.println("--------------------------------------------");
 
         System.out.println("Ingrese la cantidad a convertir:");
         double amount = scanner.nextDouble();
@@ -78,8 +81,9 @@ public class CurrencyConverter {
             if (conversionRates.has(targetCurrency)) {
                 double rate = conversionRates.get(targetCurrency).getAsDouble();
                 double convertedAmount = rate * amount;
+                System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++");
                 System.out.printf("La cantidad convertida es: %.2f %s\n", convertedAmount, targetCurrency);
-                System.out.println("\n********************************************");
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
 
             } else {
                 System.out.println("No se encontró la tasa para " + targetCurrency);
@@ -89,5 +93,7 @@ public class CurrencyConverter {
         }
 
         scanner.close();
+
+        System.out.println("\nGracias por usar nuestros servicios");
     }
 }
