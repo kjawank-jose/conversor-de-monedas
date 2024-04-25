@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class ExchangeService {
 
-    private static final String API_KEY = "1d8a2edeb14ea7140a6dd542"; // Tu clave de API
+    private static final String API_KEY = "1d8a2edeb14ea7140a6dd542"; // Clave API
     private static final String BASE_URL = "https://v6.exchangerate-api.com/v6/";
 
     public JsonObject getRates(String currencyCode) {
