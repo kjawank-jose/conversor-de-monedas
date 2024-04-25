@@ -48,14 +48,18 @@ public class CurrencyConverter {
             String baseCurrency;
             do {
                 // Inicio de interacción con el usuario
-                System.out.println("\n********************************************");
-                System.out.println("\nIngrese la moneda a convertir: \n");
+                System.out.println("-----------------------------------------");
+                System.out.println("Bienvenido: Conversor de divisas");
+                System.out.println("-----------------------------------------");
+
+                System.out.println("Ingrese el codigo de la moneda a convertir:");
+                System.out.println("********************************************");
                 int i = 1;
                 for (String currency : AVAILABLE_CURRENCIES) {
                     if (i % 3 != 0) {
-                        System.out.printf(" %2d. %-4s - %-25s", i, currency, CURRENCY_NAMES.get(currency));
+                        System.out.printf(" %2d. %-2s - %-25s", i, currency, CURRENCY_NAMES.get(currency));
                     } else {
-                        System.out.printf(" %2d. %-4s - %-25s\n", i, currency, CURRENCY_NAMES.get(currency));
+                        System.out.printf(" %2d. %-2s - %-25s\n", i, currency, CURRENCY_NAMES.get(currency));
                     }
                     i++;
                 }
@@ -120,7 +124,18 @@ public class CurrencyConverter {
             System.out.println("--------------------------------------------");
 
             System.out.println("Ingrese la cantidad a convertir:");
-            double amount = scanner.nextDouble();
+            double amount;
+
+            while (true) {
+                if (scanner.hasNextDouble()) {
+                    amount = scanner.nextDouble();
+                    scanner.nextLine();
+                    break;
+                }else{
+                    System.out.println("Entrada no valida. POr favor ingresa un número");
+                    scanner.next();
+                }
+            }
 
             ExchangeService exchangeService = new ExchangeService();
             JsonObject rates = exchangeService.getRates(baseCurrency);
@@ -142,10 +157,10 @@ public class CurrencyConverter {
             }
 
             //Limpia
-            scanner.nextLine();
+            // scanner.nextLine();
 
             // Menu de opción de salida
-            System.out.println("\n ¿Desea realizar otra operación?");
+            System.out.println("\n ¿Desea realizar otra operación?\n");
             System.out.println("1. Si");
             System.out.println("2. No");
             System.out.println("Ingrese su opción: ");
@@ -171,7 +186,9 @@ public class CurrencyConverter {
         }
             scanner.close();
 
-            System.out.println("\nGracias por usar nuestros servicios");
+            System.out.println("\n++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("Gracias por usar nuestros servicios");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++");
         }
     }
 
